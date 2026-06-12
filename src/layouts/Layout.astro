@@ -184,7 +184,11 @@ const bannerOffset =
 						}, { threshold: 0.05 }).observe(v);
 					}
 				}
-				setup();
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", setup);
+				} else {
+					setup();
+				}
 				var h = setInterval(function () {
 					if (window.swup && window.swup.hooks) {
 						clearInterval(h);
@@ -217,6 +221,17 @@ const bannerOffset =
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
+/* Tailwind transform 变量缺省值：构建产物中 preflight 的 @defaults 块缺失，
+   导致 translate/scale 等工具类的 transform 整体失效，这里按 preflight 等价补齐 */
+*, ::before, ::after {
+	--tw-translate-x: 0;
+	--tw-translate-y: 0;
+	--tw-rotate: 0;
+	--tw-skew-x: 0;
+	--tw-skew-y: 0;
+	--tw-scale-x: 1;
+	--tw-scale-y: 1;
+}
 @tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {

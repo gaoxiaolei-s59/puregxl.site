@@ -4,12 +4,19 @@
 	if (window.__pgxlProg) return;
 	window.__pgxlProg = true;
 	var bar = document.getElementById("reading-progress");
+	function scroller() {
+		// Fuwari 用 OverlayScrollbars 接管滚动，真实滚动源是它的 viewport 元素
+		return document.querySelector("[data-overlayscrollbars-viewport]") || document.documentElement;
+	}
 	function onScroll() {
 		var article = document.querySelector(".custom-md");
 		if (!article) { bar.style.width = "0"; return; }
-		var max = document.documentElement.scrollHeight - innerHeight;
-		bar.style.width = (max > 0 ? Math.min(100, (scrollY / max) * 100) : 0) + "%";
+		var el = scroller();
+		var max = el.scrollHeight - el.clientHeight;
+		var y = el.scrollTop || scrollY;
+		bar.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + "%";
 	}
+	document.addEventListener("scroll", onScroll, { capture: true, passive: true });
 	addEventListener("scroll", onScroll, { passive: true });
 	onScroll();
 	var h = setInterval(function () {
