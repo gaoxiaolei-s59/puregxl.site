@@ -1,0 +1,87 @@
+<canvas id="fx-canvas" style="position:fixed;inset:0;z-index:9999;pointer-events:none;"></canvas>
+<script is:inline>
+(function () {
+	if (window.__pgxlFx) return;
+	window.__pgxlFx = true;
+	var fine = window.matchMedia("(pointer: fine)").matches;
+	var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	var cv = document.getElementById("fx-canvas");
+	if (!fine || reduced || !cv) { if (cv) cv.remove(); return; }
+	var ctx = cv.getContext("2d");
+	var parts = [], mx = -100, my = -100, rx = -100, ry = -100, hover = false, paused = false;
+	var color = "#7F77DD";
+	function refreshColor() {
+		var c = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
+		if (!c) return;
+		ctx.fillStyle = "#000"; ctx.fillStyle = c;
+		if (ctx.fillStyle !== "#000000") color = c;
+	}
+	function fit() { cv.width = innerWidth; cv.height = innerHeight; }
+	fit(); addEventListener("resize", fit);
+	refreshColor(); setInterval(refreshColor, 1500);
+	document.documentElement.classList.add("pgxl-cursor");
+	document.addEventListener("mousemove", function (e) {
+		mx = e.clientX; my = e.clientY;
+		hover = !!(e.target && e.target.closest && e.target.closest("a,button,[role=button],input,select,textarea,[data-tilt]"));
+		var inProse = !!(e.target && e.target.closest && e.target.closest(".custom-md"));
+		var n = inProse ? 1 : 2;
+		for (var i = 0; i < n; i++)
+			parts.push({ x: mx + (Math.random() * 10 - 5), y: my + (Math.random() * 10 - 5), vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6 - 0.3, life: 1, size: Math.random() * 2.2 + 0.8, kind: "t" });
+		if (parts.length > 220) parts.splice(0, parts.length - 220);
+	}, { passive: true });
+	document.addEventListener("click", function (e) {
+		parts.push({ x: e.clientX, y: e.clientY, life: 1, ring: 1, kind: "r" });
+		for (var i = 0; i < 22; i++) {
+			var a = Math.PI * 2 * i / 22, sp = Math.random() * 3 + 1.2;
+			parts.push({ x: e.clientX, y: e.clientY, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, size: Math.random() * 2.4 + 1, kind: "b" });
+		}
+	}, { passive: true });
+	addEventListener("blur", function () { paused = true; });
+	addEventListener("focus", function () { paused = false; });
+	var tiltEl = null;
+	document.addEventListener("mouseover", function (e) {
+		var t = e.target && e.target.closest && e.target.closest("[data-tilt]");
+		if (t && t !== tiltEl) { tiltEl = t; t.style.transition = "transform .15s"; t.style.willChange = "transform"; }
+	}, { passive: true });
+	document.addEventListener("mousemove", function (e) {
+		if (!tiltEl) return;
+		if (!tiltEl.matches(":hover")) { tiltEl.style.transform = ""; tiltEl = null; return; }
+		var r = tiltEl.getBoundingClientRect();
+		var dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+		tiltEl.style.transform = "perspective(800px) rotateX(" + (-dy * 6).toFixed(2) + "deg) rotateY(" + (dx * 6).toFixed(2) + "deg)";
+	}, { passive: true });
+	document.addEventListener("mouseout", function (e) {
+		if (tiltEl && e.target === tiltEl && !tiltEl.contains(e.relatedTarget)) { tiltEl.style.transform = ""; tiltEl = null; }
+	}, { passive: true });
+	function ga(a) { ctx.globalAlpha = Math.max(0, Math.min(1, a)); }
+	function tick() {
+		requestAnimationFrame(tick);
+		if (paused) return;
+		ctx.clearRect(0, 0, cv.width, cv.height);
+		for (var i = parts.length - 1; i >= 0; i--) {
+			var p = parts[i];
+			if (p.kind === "r") {
+				p.ring += 2.6; p.life -= 0.04;
+				if (p.life <= 0) { parts.splice(i, 1); continue; }
+				ga(p.life * 0.8); ctx.beginPath(); ctx.arc(p.x, p.y, p.ring, 0, 6.29); ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+			} else {
+				p.x += p.vx; p.y += p.vy; if (p.kind === "b") p.vy += 0.06;
+				p.life -= p.kind === "b" ? 0.022 : 0.03;
+				if (p.life <= 0) { parts.splice(i, 1); continue; }
+				ga(p.life * 0.9); ctx.beginPath(); ctx.arc(p.x, p.y, p.size * p.life, 0, 6.29); ctx.fillStyle = color; ctx.fill();
+			}
+		}
+		if (mx >= 0) {
+			rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+			ga(0.9); ctx.beginPath(); ctx.arc(rx, ry, hover ? 24 : 13, 0, 6.29); ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.stroke();
+			ga(1); ctx.beginPath(); ctx.arc(mx, my, 2.6, 0, 6.29); ctx.fillStyle = color; ctx.fill();
+		}
+		ga(1);
+	}
+	tick();
+})();
+</script>
+<style is:global>
+	html.pgxl-cursor, html.pgxl-cursor a, html.pgxl-cursor button { cursor: none; }
+	@media (pointer: coarse) { #fx-canvas { display: none; } }
+</style>

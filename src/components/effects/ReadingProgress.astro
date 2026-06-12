@@ -1,0 +1,19 @@
+<div id="reading-progress" style="position:fixed;top:0;left:0;height:2px;width:0;z-index:10000;background:var(--primary);transition:width .1s linear;"></div>
+<script is:inline>
+(function () {
+	if (window.__pgxlProg) return;
+	window.__pgxlProg = true;
+	var bar = document.getElementById("reading-progress");
+	function onScroll() {
+		var article = document.querySelector(".custom-md");
+		if (!article) { bar.style.width = "0"; return; }
+		var max = document.documentElement.scrollHeight - innerHeight;
+		bar.style.width = (max > 0 ? Math.min(100, (scrollY / max) * 100) : 0) + "%";
+	}
+	addEventListener("scroll", onScroll, { passive: true });
+	onScroll();
+	var h = setInterval(function () {
+		if (window.swup && window.swup.hooks) { clearInterval(h); window.swup.hooks.on("page:view", onScroll); }
+	}, 500);
+})();
+</script>
