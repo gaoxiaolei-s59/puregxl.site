@@ -44,10 +44,12 @@ const showBannerVideo =
 const hasBannerCredit =
 	bannerVisible && siteConfig.banner.credit.enable;
 const hasBannerLink = !!siteConfig.banner.credit.url;
+const mainPanelTop = !bannerVisible
+	? "5.5rem"
+	: showBannerVideo
+		? `calc(${BANNER_HEIGHT}vh + 1rem)`
+		: `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`;
 
-const mainPanelTop = bannerVisible
-	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
-	: "5.5rem";
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
