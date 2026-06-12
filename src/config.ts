@@ -54,11 +54,6 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://github.com/gaoxiaolei-s59", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},
-		{
-			name: "短链接",
-			url: "https://link.puregxl.site",
-			external: true,
-		},
 	],
 };
 
