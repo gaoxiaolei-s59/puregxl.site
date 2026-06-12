@@ -162,6 +162,36 @@ const bannerOffset =
 			})();
 		</script>
 
+		<script is:inline>
+			// 视频策略：触屏/减动效只看海报；滚出首屏自动暂停
+			(function () {
+				if (window.__pgxlVideo) return;
+				window.__pgxlVideo = true;
+				function setup() {
+					var v = document.getElementById("banner-video");
+					if (!v || v.dataset.bound) return;
+					v.dataset.bound = "1";
+					var fine = window.matchMedia("(pointer: fine)").matches;
+					var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+					if (fine && !reduced && v.dataset.videoSrc) {
+						v.src = v.dataset.videoSrc;
+						v.autoplay = true;
+						v.play().catch(function () {});
+						new IntersectionObserver(function (es) {
+							es.forEach(function (en) { en.isIntersecting ? v.play().catch(function(){}) : v.pause(); });
+						}, { threshold: 0.05 }).observe(v);
+					}
+				}
+				setup();
+				var h = setInterval(function () {
+					if (window.swup && window.swup.hooks) {
+						clearInterval(h);
+						window.swup.hooks.on("page:view", setup);
+					}
+				}, 500);
+			})();
+		</script>
+
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>

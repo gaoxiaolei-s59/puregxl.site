@@ -11,8 +11,10 @@ import { siteConfig } from "../config";
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
+	BANNER_HEIGHT_HOME,
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
+import HeroOverlay from "../components/effects/HeroOverlay.astro";
 import { pathsEqual, url } from "../utils/url-utils";
 import Layout from "./Layout.astro";
 
@@ -46,8 +48,8 @@ const hasBannerCredit =
 const hasBannerLink = !!siteConfig.banner.credit.url;
 const mainPanelTop = !bannerVisible
 	? "5.5rem"
-	: showBannerVideo
-		? `calc(${BANNER_HEIGHT}vh + 1rem)`
+	: isHomePage
+		? `calc(${BANNER_HEIGHT_HOME}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem - ${BANNER_HEIGHT_EXTEND}vh)`
 		: `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`;
 
 ---
@@ -72,17 +74,18 @@ const mainPanelTop = !bannerVisible
             position={siteConfig.banner.position}
         />
         {showBannerVideo && <video
+            id="banner-video"
             class="absolute inset-0 z-10 h-full w-full object-cover"
-            autoplay
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
+            poster="/home-banner-poster.jpg"
+            data-video-src={siteConfig.banner.video?.src}
             aria-label="Homepage banner video"
-        >
-            <source src={siteConfig.banner.video?.src} type="video/mp4" />
-        </video>}
+        ></video>}
         <div class="absolute inset-0 z-20 bg-black/20 pointer-events-none"></div>
+        {isHomePage && <HeroOverlay />}
     </div>
 </div>}
 

@@ -1,0 +1,41 @@
+---
+import { siteConfig } from "../../config";
+---
+<div id="hero-overlay" class="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none text-white">
+    <h1 class="text-5xl md:text-7xl font-bold tracking-wide drop-shadow-lg">{siteConfig.title}</h1>
+    <p class="mt-6 h-8 text-lg md:text-2xl drop-shadow-md">
+        <span id="hero-type"></span><span id="hero-caret" class="animate-pulse">|</span>
+    </p>
+    <button id="hero-arrow" aria-label="向下滚动" class="pointer-events-auto absolute bottom-8 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition animate-bounce text-3xl">
+        ↓
+    </button>
+</div>
+<script is:inline>
+(function () {
+	if (window.__pgxlHero) return;
+	window.__pgxlHero = true;
+	var phrases = ["记录开发与学习", "Java · 后端 · 折腾不止", "欢迎来到我的小站"];
+	var pi = 0, ci = 0, deleting = false, timer = null;
+	function el() { return document.getElementById("hero-type"); }
+	function tick() {
+		var t = el();
+		if (!t) { timer = setTimeout(tick, 800); return; }
+		var p = phrases[pi];
+		if (!deleting) {
+			ci++;
+			if (ci >= p.length) { deleting = true; t.textContent = p; timer = setTimeout(tick, 2200); return; }
+		} else {
+			ci--;
+			if (ci <= 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+		}
+		t.textContent = p.slice(0, ci);
+		timer = setTimeout(tick, deleting ? 40 : 110);
+	}
+	tick();
+	document.addEventListener("click", function (e) {
+		var a = e.target && e.target.closest && e.target.closest("#hero-arrow");
+		if (!a) return;
+		window.scrollTo({ top: Math.round(window.innerHeight * 0.96), behavior: "smooth" });
+	});
+})();
+</script>
