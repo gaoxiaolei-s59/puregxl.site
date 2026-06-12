@@ -48,6 +48,14 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		{
+			name: "热爱的游戏",
+			url: "/games/",
+		},
+		{
+			name: "项目",
+			url: "/projects/",
+		},
 		LinkPreset.About,
 		{
 			name: "GitHub",
