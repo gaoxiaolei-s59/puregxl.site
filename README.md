@@ -1,4 +1,4 @@
-# puregxl.site — 高小磊的个人博客
+# puregxl.site — XiaoLei's Blog
 
 基于 [Astro](https://astro.build) + [Fuwari](https://github.com/saicaca/fuwari) 主题的静态博客，部署在自有服务器上。
 （Fuwari 模板自身的文档见 [docs/](docs/) 目录和上游仓库。）
