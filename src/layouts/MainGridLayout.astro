@@ -13,6 +13,7 @@ import {
 	BANNER_HEIGHT_EXTEND,
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
+import { pathsEqual, url } from "../utils/url-utils";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -32,11 +33,19 @@ const {
 	setOGTypeArticle,
 	headings = [],
 } = Astro.props;
+const isHomePage = pathsEqual(Astro.url.pathname, url("/"));
+const bannerVisible =
+	siteConfig.banner.enable && (!siteConfig.banner.homeOnly || isHomePage);
+const showBannerVideo =
+	bannerVisible &&
+	isHomePage &&
+	!!siteConfig.banner.video?.enable &&
+	!!siteConfig.banner.video?.src;
 const hasBannerCredit =
-	siteConfig.banner.enable && siteConfig.banner.credit.enable;
+	bannerVisible && siteConfig.banner.credit.enable;
 const hasBannerLink = !!siteConfig.banner.credit.url;
 
-const mainPanelTop = siteConfig.banner.enable
+const mainPanelTop = bannerVisible
 	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 	: "5.5rem";
 ---
@@ -52,11 +61,27 @@ const mainPanelTop = siteConfig.banner.enable
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
-    <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
-                  src={siteConfig.banner.src} position={siteConfig.banner.position}
-    >
-    </ImageWrapper>
+{bannerVisible && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
+    <div id="banner" class:list={["h-full transition duration-700 opacity-0 scale-105 relative overflow-hidden"]}>
+        <ImageWrapper
+            alt="Banner image of the blog"
+            class="absolute inset-0 h-full w-full"
+            src={siteConfig.banner.src}
+            position={siteConfig.banner.position}
+        />
+        {showBannerVideo && <video
+            class="absolute inset-0 z-10 h-full w-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="Homepage banner video"
+        >
+            <source src={siteConfig.banner.video?.src} type="video/mp4" />
+        </video>}
+        <div class="absolute inset-0 z-20 bg-black/20 pointer-events-none"></div>
+    </div>
 </div>}
 
 <!-- Main content -->
@@ -107,7 +132,7 @@ const mainPanelTop = siteConfig.banner.enable
     <div class="relative max-w-[var(--page-width)] mx-auto">
         <!-- TOC component -->
         {siteConfig.toc.enable && <div id="toc-wrapper" class:list={["hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center",
-            {"toc-hide": siteConfig.banner.enable}]}
+            {"toc-hide": bannerVisible}]}
         >
             <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
                 <div id="toc" class="w-full h-full transition-swup-fade ">

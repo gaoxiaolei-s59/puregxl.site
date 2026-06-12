@@ -22,7 +22,12 @@ export type SiteConfig = {
 	};
 	banner: {
 		enable: boolean;
+		homeOnly?: boolean;
 		src: string;
+		video?: {
+			enable: boolean;
+			src: string;
+		};
 		position?: "top" | "center" | "bottom";
 		credit: {
 			enable: boolean;
