@@ -1,0 +1,19 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="509" cy="96" r="90" fill="#C7FFF1" fill-opacity=".16"/>
+  <path d="M490 72h18v128h-18z" fill="#C4FFF3"/>
+  <path d="M483 82h32v12h-32z" fill="#92E7D0"/>
+  <path d="M482 202h34l-17 47z" fill="#D8FFF7"/>
+  <path d="M97 256c35-34 74-44 122-30 55 17 103 11 161-22 44-25 85-27 133-6" stroke="#8AE5CC" stroke-opacity=".52" stroke-width="4" stroke-linecap="round"/>
+  <text x="66" y="110" fill="#DFFFF8" font-size="18" font-family="Arial, sans-serif" font-weight="700">WUXIA · PIXEL RPG</text>
+  <text x="66" y="166" fill="#FFFFFF" font-size="42" font-family="Arial, sans-serif" font-weight="700">逸剑风云决</text>
+  <text x="66" y="212" fill="#C8F6EC" font-size="20" font-family="Arial, sans-serif">像素江湖和武侠味道特别对胃口</text>
+  <rect x="66" y="244" width="168" height="34" rx="17" fill="#153E37" fill-opacity=".56"/>
+  <text x="88" y="267" fill="#B7FFF1" font-size="16" font-family="Arial, sans-serif" font-weight="700">旧味道 + 新体验</text>
+  <defs>
+    <linearGradient id="bg" x1="640" y1="0" x2="0" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E433E"/>
+      <stop offset="1" stop-color="#0E2322"/>
+    </linearGradient>
+  </defs>
+</svg>

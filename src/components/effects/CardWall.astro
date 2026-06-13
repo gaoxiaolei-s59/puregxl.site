@@ -34,8 +34,8 @@ const { items, tabs, heading, subtitle } = Astro.props;
                     {...(c.url ? { href: c.url, target: "_blank", rel: "noopener" } : {})}
                 >
                     {c.image && (
-                        <div class:list={["cw-img", { contain: c.imageFit === "contain" }]} style={c.imageBg ? `background: ${c.imageBg}` : undefined}>
-                            <img src={c.image} alt={c.title} loading="lazy" />
+                        <div class:list={["cw-media", { contain: c.imageFit === "contain" }]} style={c.imageBg ? `background: ${c.imageBg}` : undefined}>
+                            <img src={c.image} alt={c.title} loading="lazy" class="cw-img" />
                         </div>
                     )}
                     <div class="cw-ct">
@@ -92,16 +92,21 @@ const { items, tabs, heading, subtitle } = Astro.props;
         background: rgba(255,255,255,.5);
         -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
         border: 1px solid rgba(255,255,255,.7); border-radius: 14px;
-        padding: 15px 16px 13px; box-shadow: 0 6px 20px rgba(51,79,82,.08);
+        padding: 12px 12px 13px; box-shadow: 0 6px 20px rgba(51,79,82,.08);
         transition: transform .22s, box-shadow .22s;
         display: flex; flex-direction: column; gap: 9px; text-decoration: none; color: inherit;
     }
     a.cw-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(53,191,171,.22); }
-    .cw-img { margin: -15px -16px 12px; height: 116px; border-radius: 14px 14px 0 0; overflow: hidden; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.04); }
-    .cw-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .cw-img.contain { padding: 14px; }
-    .cw-img.contain img { object-fit: contain; }
-
+    .cw-media {
+        overflow: hidden; border-radius: 12px;
+        aspect-ratio: 16 / 9;
+        background: linear-gradient(135deg, rgba(31,201,231,.18), rgba(53,191,171,.18));
+        border: 1px solid rgba(255,255,255,.66);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .cw-img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .cw-media.contain { padding: 12px; }
+    .cw-media.contain .cw-img { object-fit: contain; }
     .cw-ct { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .cw-ct b { font-size: 15px; font-weight: 600; color: #2b4548; }
     .cw-ext { color: #35bfab; flex-shrink: 0; }
@@ -114,6 +119,7 @@ const { items, tabs, heading, subtitle } = Astro.props;
     :global(html.dark) .cw-wrap { background: linear-gradient(135deg, #0f2a2b 0%, #0c2230 55%, #102b2a 100%); }
     :global(html.dark) .cw-tab { background: rgba(255,255,255,.06); color: #cfe7e4; border-color: rgba(53,191,171,.3); }
     :global(html.dark) .cw-card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+    :global(html.dark) .cw-media { border-color: rgba(255,255,255,.1); background: linear-gradient(135deg, rgba(31,201,231,.12), rgba(53,191,171,.12)); }
     :global(html.dark) .cw-ct b { color: #e3f3f1; }
     :global(html.dark) .cw-desc { color: #8aa3a3; }
     :global(html.dark) .cw-tag { background: rgba(31,201,231,.16); color: #6fd9ec; }

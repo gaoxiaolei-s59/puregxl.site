@@ -1,0 +1,19 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="520" cy="84" r="92" fill="#8CF7EA" fill-opacity=".2"/>
+  <circle cx="90" cy="72" r="68" stroke="#B9FFF5" stroke-opacity=".36" stroke-width="2"/>
+  <path d="M64 220c55-78 123-74 171-18 50 57 108 65 188 13 47-31 93-26 153 14" stroke="#D6FFFB" stroke-opacity=".55" stroke-width="8" stroke-linecap="round"/>
+  <path d="M92 255c38-40 77-50 118-31 41 18 78 19 126 2 51-19 97-14 150 18" stroke="#82EDE1" stroke-opacity=".78" stroke-width="5" stroke-linecap="round"/>
+  <text x="66" y="118" fill="#E8FFFC" font-size="22" font-family="Arial, sans-serif" font-weight="700">WUWA</text>
+  <text x="66" y="165" fill="#FFFFFF" font-size="44" font-family="Arial, sans-serif" font-weight="700">鸣潮</text>
+  <text x="66" y="212" fill="#C8F9F3" font-size="20" font-family="Arial, sans-serif">战斗手感和探索都很上头</text>
+  <rect x="66" y="246" width="186" height="34" rx="17" fill="#092B38" fill-opacity=".54"/>
+  <text x="84" y="269" fill="#A9FFF2" font-size="16" font-family="Arial, sans-serif" font-weight="700">OPEN WORLD · ACTION RPG</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16343A"/>
+      <stop offset=".48" stop-color="#10323A"/>
+      <stop offset="1" stop-color="#201B38"/>
+    </linearGradient>
+  </defs>
+</svg>
