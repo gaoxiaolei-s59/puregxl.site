@@ -10,6 +10,32 @@ const latest = posts[0] ?? null;
 const pool = posts.slice(1);
 const random = pool.length ? pool[Math.floor(Math.random() * pool.length)] : latest;
 
+// 构建时抓取掘金文章（失败则静默降级，主页其余照常）
+type JuejinPost = { title: string; views: number; url: string };
+let juejinPosts: JuejinPost[] = [];
+try {
+	const res = await fetch(
+		"https://api.juejin.cn/content_api/v1/article/query_list",
+		{
+			method: "POST",
+			headers: { "content-type": "application/json", "user-agent": "Mozilla/5.0" },
+			body: JSON.stringify({ user_id: "4461159469290944", sort_type: 2, cursor: "0" }),
+			signal: AbortSignal.timeout(8000),
+		},
+	);
+	const data = await res.json();
+	if (data?.err_no === 0 && Array.isArray(data.data)) {
+		juejinPosts = data.data.slice(0, 6).map((a: any) => ({
+			title: a.article_info.title,
+			views: a.article_info.view_count,
+			url: `https://juejin.cn/post/${a.article_info.article_id}`,
+		}));
+	}
+} catch {
+	// 掘金不可达时跳过该卡片
+}
+const juejinProfile = "https://juejin.cn/user/4461159469290944";
+
 const githubLink = profileConfig.links.find((l) => l.name === "GitHub")?.url;
 const email = "chaungoc0912@gmail.com";
 
@@ -81,6 +107,24 @@ const menu = [
                 <p class="d-pd">{random.data.tags?.slice(0, 2).join(" · ") || formatDateToYYYYMMDD(random.data.published)}</p>
             </a>
         )}
+
+        <!-- 掘金文章 -->
+        {juejinPosts.length > 0 && (
+            <section class="d-card d-juejin">
+                <div class="d-jj-head">
+                    <p class="d-plabel" style="margin:0;">掘金文章</p>
+                    <a class="d-jj-more" href={juejinProfile} target="_blank" rel="noopener">全部 →</a>
+                </div>
+                <div class="d-jj-list">
+                    {juejinPosts.map((p) => (
+                        <a class="d-jj-item" href={p.url} target="_blank" rel="noopener">
+                            <span class="d-jj-title">{p.title}</span>
+                            <span class="d-jj-views">{p.views} 阅读</span>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        )}
     </div>
 </div>
 
@@ -100,7 +144,8 @@ const menu = [
         grid-template-areas:
             "prof greet clock"
             "prof greet cal"
-            "latest random cal";
+            "latest random cal"
+            "juejin juejin juejin";
         gap: 14px;
     }
     .d-card {
@@ -153,9 +198,19 @@ const menu = [
     .d-pt { font-size: 15px; font-weight: 600; margin: 0; }
     .d-pd { font-size: 12px; color: #7b888e; margin: 6px 0 0; }
 
+    .d-juejin { grid-area: juejin; }
+    .d-jj-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .d-jj-more { font-size: 12px; color: #1fa9c4; text-decoration: none; }
+    .d-jj-more:hover { text-decoration: underline; }
+    .d-jj-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 6px 18px; }
+    .d-jj-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 8px; border-radius: 8px; text-decoration: none; color: inherit; transition: background .2s; }
+    .d-jj-item:hover { background: rgba(53,191,171,.12); }
+    .d-jj-title { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .d-jj-views { font-size: 11px; color: #35bfab; white-space: nowrap; flex-shrink: 0; }
+
     @media (max-width: 768px) {
         .dash { padding-top: 1.5rem; min-height: 0; }
-        .dash-grid { grid-template-columns: 1fr; grid-template-areas: "greet" "prof" "clock" "cal" "latest" "random"; }
+        .dash-grid { grid-template-columns: 1fr; grid-template-areas: "greet" "prof" "clock" "cal" "latest" "random" "juejin"; }
     }
 </style>
 
