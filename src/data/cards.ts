@@ -8,6 +8,9 @@ export interface CardItem {
 	url?: string; // 可选：点击跳转的链接，不填则卡片不可点
 	badge?: string; // 可选：右下角小徽章，如 "本站" "进行中" "2 PR"
 	category?: string; // 仅 /share 用：所属分类，要和页面 tabs 里的某一项一致
+	image?: string; // 可选：卡片顶部封面图（public 下的路径，如 "/games/wukong.jpg"）
+	imageFit?: "cover" | "contain"; // 封面填充方式：截图用 cover（默认），logo 用 contain
+	imageBg?: string; // contain 模式下封面区背景（深色 logo 配浅底，亮色 logo 配深底）
 }
 
 // ===== 项目 =====
@@ -73,22 +76,41 @@ export const openSource: CardItem[] = [
 	},
 ];
 
-// ===== 热爱的游戏 ===== （占位，替换成你自己的）
+// ===== 热爱的游戏 =====
 export const games: CardItem[] = [
 	{
-		title: "游戏名一",
-		desc: "一句话点评：为什么喜欢它（占位）。",
-		tags: ["动作"],
+		title: "英雄联盟",
+		desc: "经典 5v5 MOBA，召唤师峡谷常驻。",
+		tags: ["MOBA", "竞技"],
+		image: "/games/lol.png",
+		imageFit: "contain",
+		imageBg: "linear-gradient(135deg, #0a1428, #1e2d4d)",
 	},
 	{
-		title: "游戏名二",
-		desc: "一句话点评（占位）。",
-		tags: ["RPG"],
+		title: "鸣潮",
+		desc: "Kuro 出品的开放世界动作游戏。",
+		tags: ["开放世界", "ACT"],
+		image: "/games/wuwa.png",
+		imageFit: "contain",
+		imageBg: "linear-gradient(135deg, #eef3f7, #dde9f1)",
 	},
 	{
-		title: "游戏名三",
-		desc: "一句话点评（占位）。",
-		tags: ["策略"],
+		title: "黑神话：悟空",
+		desc: "国产 3A 动作角色扮演，西游题材。",
+		tags: ["ACT", "单机"],
+		image: "/games/wukong.jpg",
+	},
+	{
+		title: "逸剑风云决",
+		desc: "像素武侠 RPG，江湖快意恩仇。",
+		tags: ["武侠", "RPG"],
+		image: "/games/wanderingsword.jpg",
+	},
+	{
+		title: "幻兽帕鲁",
+		desc: "帕鲁捕捉 + 生存建造的开放世界。",
+		tags: ["开放世界", "生存"],
+		image: "/games/palworld.jpg",
 	},
 ];
 
