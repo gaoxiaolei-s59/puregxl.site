@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
-		enable: true,
+		enable: false,
 		homeOnly: true,
 		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		video: {
@@ -47,6 +47,10 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
+		{
+			name: "文章",
+			url: "/blog/",
+		},
 		LinkPreset.Archive,
 		{
 			name: "热爱的游戏",
