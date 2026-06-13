@@ -1,0 +1,18 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="517" cy="86" r="100" fill="#D49F49" fill-opacity=".16"/>
+  <circle cx="517" cy="86" r="72" stroke="#E3BC71" stroke-opacity=".34" stroke-width="2"/>
+  <path d="M479 178 528 89l20 12-49 89z" fill="#E0AE55"/>
+  <path d="M500 74h53l-13 26h-28z" fill="#8A5528"/>
+  <text x="66" y="108" fill="#E5C07B" font-size="18" font-family="Arial, sans-serif" font-weight="700">DESTINED ONE</text>
+  <text x="66" y="166" fill="#FFF2D6" font-size="44" font-family="Arial, sans-serif" font-weight="700">黑神话：悟空</text>
+  <text x="66" y="214" fill="#D7C2A4" font-size="20" font-family="Arial, sans-serif">氛围、演出、战斗都很有冲击力</text>
+  <text x="68" y="292" fill="#E0AE55" font-size="72" font-family="Georgia, serif" font-weight="700">悟</text>
+  <defs>
+    <linearGradient id="bg" x1="23" y1="26" x2="566" y2="339" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#231B15"/>
+      <stop offset=".6" stop-color="#111111"/>
+      <stop offset="1" stop-color="#2B2014"/>
+    </linearGradient>
+  </defs>
+</svg>

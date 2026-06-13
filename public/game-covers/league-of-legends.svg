@@ -1,0 +1,22 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="525" cy="88" r="88" fill="url(#halo)" fill-opacity=".38"/>
+  <circle cx="123" cy="293" r="128" fill="#0B2342" fill-opacity=".44"/>
+  <path d="M130 73h108l-76 214H54z" fill="#0A1830" fill-opacity=".72"/>
+  <path d="M169 93h26l-41 115h59l-10 29H117z" fill="#E1B95B"/>
+  <rect x="366" y="89" width="176" height="36" rx="18" fill="#0B2342" fill-opacity=".66"/>
+  <text x="386" y="113" fill="#F3D58A" font-size="18" font-family="Arial, sans-serif" font-weight="700">TEAMFIGHT · CLUTCH · RIFT</text>
+  <text x="366" y="180" fill="#F5F8FF" font-size="42" font-family="Arial, sans-serif" font-weight="700">英雄联盟</text>
+  <text x="366" y="224" fill="#B7CCEA" font-size="20" font-family="Arial, sans-serif">最喜欢的 5v5 团队竞技感</text>
+  <text x="366" y="286" fill="#E1B95B" font-size="48" font-family="Georgia, serif" font-weight="700">LOL</text>
+  <defs>
+    <linearGradient id="bg" x1="69" y1="40" x2="558" y2="334" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#112A4B"/>
+      <stop offset="1" stop-color="#09131F"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(525 88) rotate(90) scale(88)">
+      <stop stop-color="#E1B95B"/>
+      <stop offset="1" stop-color="#E1B95B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -5,6 +5,7 @@ export interface CardItem {
 	title: string; // 卡片标题
 	desc: string; // 一句话描述
 	tags: string[]; // 标签（胶囊），可留空数组 []
+	image?: string; // 可选：卡片头图 / 图标
 	url?: string; // 可选：点击跳转的链接，不填则卡片不可点
 	badge?: string; // 可选：右下角小徽章，如 "本站" "进行中" "2 PR"
 	category?: string; // 仅 /share 用：所属分类，要和页面 tabs 里的某一项一致
@@ -73,22 +74,47 @@ export const openSource: CardItem[] = [
 	},
 ];
 
-// ===== 热爱的游戏 ===== （占位，替换成你自己的）
+// ===== 热爱的游戏 =====
 export const games: CardItem[] = [
 	{
-		title: "游戏名一",
-		desc: "一句话点评：为什么喜欢它（占位）。",
-		tags: ["动作"],
+		title: "英雄联盟",
+		desc: "陪伴很久的竞技游戏，最喜欢它的团队配合、操作上限和翻盘感。",
+		tags: ["MOBA", "竞技", "开黑"],
+		image: "/game-covers/league-of-legends.svg",
+		url: "https://www.leagueoflegends.com/zh-cn/",
+		badge: "常玩",
 	},
 	{
-		title: "游戏名二",
-		desc: "一句话点评（占位）。",
-		tags: ["RPG"],
+		title: "鸣潮",
+		desc: "喜欢它的战斗手感、角色设计和开放世界里的探索节奏。",
+		tags: ["开放世界", "动作 RPG", "二次元"],
+		image: "/game-covers/wuthering-waves.svg",
+		url: "https://wutheringwaves.kurogames.com/zh/main",
+		badge: "探索",
 	},
 	{
-		title: "游戏名三",
-		desc: "一句话点评（占位）。",
-		tags: ["策略"],
+		title: "黑神话：悟空",
+		desc: "国产动作游戏里让我印象很深的一部，氛围、演出和战斗都很顶。",
+		tags: ["动作", "神话", "单机"],
+		image: "/game-covers/black-myth-wukong.svg",
+		url: "https://www.heishenhua.com/",
+		badge: "国产",
+	},
+	{
+		title: "逸剑风云决",
+		desc: "像素武侠和江湖叙事很对我胃口，既有旧味道也有现代体验。",
+		tags: ["武侠", "像素 RPG", "剧情"],
+		image: "/game-covers/wandering-sword.svg",
+		url: "https://store.steampowered.com/app/1876890/Wandering_Sword/?l=schinese",
+		badge: "江湖",
+	},
+	{
+		title: "幻兽帕鲁",
+		desc: "轻松上头的抓宠和生存建造体验，和朋友一起玩会更快乐。",
+		tags: ["生存", "建造", "联机"],
+		image: "/game-covers/palworld.svg",
+		url: "https://store.steampowered.com/app/1623730/Palworld/",
+		badge: "联机",
 	},
 ];
 

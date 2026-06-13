@@ -1,0 +1,19 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="515" cy="96" r="84" fill="#D8FFF2" fill-opacity=".24"/>
+  <circle cx="515" cy="96" r="40" fill="#A4F5D7"/>
+  <path d="M475 96h80" stroke="#17393B" stroke-width="10"/>
+  <circle cx="515" cy="96" r="12" fill="#17393B"/>
+  <circle cx="126" cy="263" r="118" fill="#153347" fill-opacity=".34"/>
+  <text x="66" y="112" fill="#E3FFF9" font-size="18" font-family="Arial, sans-serif" font-weight="700">PALS · SURVIVAL · CO-OP</text>
+  <text x="66" y="166" fill="#FFFFFF" font-size="44" font-family="Arial, sans-serif" font-weight="700">幻兽帕鲁</text>
+  <text x="66" y="214" fill="#D6FBF3" font-size="20" font-family="Arial, sans-serif">抓宠、生存、建造，和朋友一起最欢乐</text>
+  <text x="66" y="294" fill="#9EF0D7" font-size="52" font-family="Arial, sans-serif" font-weight="700">PAL</text>
+  <defs>
+    <linearGradient id="bg" x1="39" y1="12" x2="607" y2="349" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F5E65"/>
+      <stop offset=".55" stop-color="#204E66"/>
+      <stop offset="1" stop-color="#1A2B3C"/>
+    </linearGradient>
+  </defs>
+</svg>
