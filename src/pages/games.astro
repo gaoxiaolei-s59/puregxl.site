@@ -1,22 +1,8 @@
 ---
-import { getEntry, render } from "astro:content";
-import Markdown from "@components/misc/Markdown.astro";
+import CardWall from "@components/effects/CardWall.astro";
+import { games } from "../data/cards";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-
-const gamesPost = await getEntry("spec", "games");
-
-if (!gamesPost) {
-	throw new Error("Games page content not found");
-}
-
-const { Content } = await render(gamesPost);
 ---
 <MainGridLayout title="热爱的游戏" description="热爱的游戏">
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
-            <Markdown class="mt-2">
-                <Content />
-            </Markdown>
-        </div>
-    </div>
+    <CardWall items={games} heading="热爱的游戏" subtitle="陪我度过时光的游戏" />
 </MainGridLayout>

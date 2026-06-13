@@ -1,0 +1,11 @@
+---
+import CardWall from "@components/effects/CardWall.astro";
+import { shares } from "../data/cards";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+// tabs 第一项固定为「全部」，其余要和 src/data/cards.ts 里 shares 的 category 对应
+const tabs = ["全部", "文章", "工具", "网站"];
+---
+<MainGridLayout title="分享" description="收藏与分享">
+    <CardWall items={shares} tabs={tabs} heading="分享" subtitle="收藏的资源，按分类浏览" />
+</MainGridLayout>
