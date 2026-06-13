@@ -11,7 +11,6 @@ export interface CardItem {
 }
 
 // ===== 项目 =====
-// category 用于项目页的分类标签：「项目」或「开源」（要和 src/pages/projects.astro 的 tabs 对应）
 export const projects: CardItem[] = [
 	{
 		title: "短链接系统",
@@ -19,7 +18,6 @@ export const projects: CardItem[] = [
 		tags: ["Java", "Spring"],
 		url: "https://link.puregxl.site",
 		badge: "在线",
-		category: "项目",
 	},
 	{
 		title: "puregxl.site 博客",
@@ -27,14 +25,12 @@ export const projects: CardItem[] = [
 		tags: ["Astro", "Fuwari"],
 		url: "https://github.com/gaoxiaolei-s59/puregxl.site",
 		badge: "本站",
-		category: "项目",
 	},
 	{
 		title: "RAG 知识问答",
 		desc: "检索增强生成（RAG）的问答系统实践。",
 		tags: ["Java", "LLM"],
 		badge: "进行中",
-		category: "项目",
 	},
 	{
 		title: "JobBright",
@@ -42,15 +38,17 @@ export const projects: CardItem[] = [
 		tags: ["项目", "求职"],
 		url: "https://github.com/gaoxiaolei-s59/JobBright",
 		badge: "预览",
-		category: "项目",
 	},
+];
+
+// ===== 开源贡献 =====
+export const openSource: CardItem[] = [
 	{
 		title: "Apache Kafka",
 		desc: "参与社区贡献，关注消息流平台的工程实践。",
 		tags: ["消息队列", "Apache"],
 		url: "https://github.com/apache/kafka/pull/22544",
 		badge: "2 PR",
-		category: "开源",
 	},
 	{
 		title: "Apache RocketMQ",
@@ -58,15 +56,6 @@ export const projects: CardItem[] = [
 		tags: ["消息队列", "Apache"],
 		url: "https://github.com/apache/rocketmq/pull/10440",
 		badge: "2 PR",
-		category: "开源",
-	},
-	{
-		title: "Apache Dubbo",
-		desc: "了解 RPC 框架、服务治理与微服务生态。",
-		tags: ["RPC", "微服务"],
-		url: "https://github.com/apache/dubbo/pull/16324",
-		badge: "1 PR",
-		category: "开源",
 	},
 	{
 		title: "AgentScope-Java",
@@ -74,7 +63,6 @@ export const projects: CardItem[] = [
 		tags: ["AI Agent", "Java"],
 		url: "https://github.com/agentscope-ai/agentscope-java/pull/1684",
 		badge: "1 PR",
-		category: "开源",
 	},
 	{
 		title: "maven-lockfile",
@@ -82,7 +70,6 @@ export const projects: CardItem[] = [
 		tags: ["构建工具", "Maven"],
 		url: "https://github.com/chains-project/maven-lockfile/pull/1595",
 		badge: "1 PR",
-		category: "开源",
 	},
 ];
 
