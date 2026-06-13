@@ -2,7 +2,15 @@
 import CardWall from "@components/effects/CardWall.astro";
 import { projects } from "../data/cards";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+// tabs 第一项固定为「全部」，其余要和 src/data/cards.ts 里 projects 的 category 对应
+const tabs = ["全部", "项目", "开源"];
 ---
-<MainGridLayout title="项目" description="我的项目">
-    <CardWall items={projects} heading="项目" subtitle="做过和正在做的东西" />
+<MainGridLayout title="项目" description="我的项目与开源贡献">
+    <CardWall
+        items={projects}
+        tabs={tabs}
+        heading="项目 & 开源"
+        subtitle="保持开源贡献习惯 · 参与 Issue 讨论与 PR 提交 · 熟悉社区协作流程"
+    />
 </MainGridLayout>
