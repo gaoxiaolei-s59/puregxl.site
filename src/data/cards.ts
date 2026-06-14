@@ -128,6 +128,34 @@ export const games: CardItem[] = [
 // category 要和 share 页面的 tabs（见 src/pages/share.astro）对应
 export const shares: CardItem[] = [
 	{
+		title: "Redis 设计与实现",
+		desc: "深入 Redis 数据结构与底层实现原理。",
+		tags: ["Redis", "原理"],
+		badge: "书籍",
+		category: "书籍",
+	},
+	{
+		title: "Java 虚拟机的最佳实践",
+		desc: "JVM 内存模型、GC 与性能调优。",
+		tags: ["JVM", "Java"],
+		badge: "书籍",
+		category: "书籍",
+	},
+	{
+		title: "Java 并发编程之美",
+		desc: "并发原理、JUC 与实战。",
+		tags: ["Java", "并发"],
+		badge: "书籍",
+		category: "书籍",
+	},
+	{
+		title: "流畅的 Redis",
+		desc: "Redis 实战与进阶技巧。",
+		tags: ["Redis", "进阶"],
+		badge: "书籍",
+		category: "书籍",
+	},
+	{
 		title: "技术笔记合集",
 		desc: "平时整理的学习笔记与文档（占位）。",
 		tags: ["笔记"],
