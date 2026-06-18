@@ -122,6 +122,22 @@ export const games: CardItem[] = [
 		url: "https://store.steampowered.com/app/1623730/Palworld/",
 		badge: "联机",
 	},
+	{
+		title: "艾尔登法环",
+		desc: "魂系开放世界的集大成者，受苦也上头。",
+		tags: ["魂系", "开放世界", "ACT"],
+		image: "/games/eldenring.jpg",
+		url: "https://store.steampowered.com/app/1245620/",
+		badge: "受苦",
+	},
+	{
+		title: "只狼：影逝二度",
+		desc: "弹刀流硬核忍者动作，攻防一体的极致爽快。",
+		tags: ["魂系", "动作", "硬核"],
+		image: "/games/sekiro.jpg",
+		url: "https://store.steampowered.com/app/814380/",
+		badge: "硬核",
+	},
 ];
 
 // ===== 分享 ===== （占位，替换成你收藏的资源）
