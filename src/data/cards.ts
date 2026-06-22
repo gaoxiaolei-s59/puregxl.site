@@ -47,6 +47,20 @@ export const projects: CardItem[] = [
 // ===== 开源贡献 =====
 export const openSource: CardItem[] = [
 	{
+		title: "Spring AI Alibaba",
+		desc: "修复 ToolExample 悬空引用导致 admin-server-runtime 编译失败的问题。",
+		tags: ["Spring AI", "Java"],
+		url: "https://github.com/alibaba/spring-ai-alibaba/pull/4731",
+		badge: "已合并",
+	},
+	{
+		title: "Spring AI",
+		desc: "报告并推动修复 MarkdownCodeBlockCleaner 丢失单行代码块内容的缺陷。",
+		tags: ["Spring AI", "Java"],
+		url: "https://github.com/spring-projects/spring-ai/issues/6403",
+		badge: "Issue",
+	},
+	{
 		title: "Apache Kafka",
 		desc: "参与社区贡献，关注消息流平台的工程实践。",
 		tags: ["消息队列", "Apache"],
