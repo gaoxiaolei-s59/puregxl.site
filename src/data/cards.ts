@@ -7,6 +7,7 @@ export interface CardItem {
 	tags: string[]; // 标签（胶囊），可留空数组 []
 	url?: string; // 可选：点击跳转的链接，不填则卡片不可点
 	badge?: string; // 可选：右下角小徽章，如 "本站" "进行中" "2 PR"
+	badgeColor?: "green" | "amber" | "blue" | "teal"; // 徽章配色：green=已完成/合并，amber=进行中，blue=信息/Issue，默认 teal
 	category?: string; // 仅 /share 用：所属分类，要和页面 tabs 里的某一项一致
 	image?: string; // 可选：卡片顶部封面图（public 下的路径，如 "/games/wukong.jpg"）
 	imageFit?: "cover" | "contain"; // 封面填充方式：截图用 cover（默认），logo 用 contain
@@ -52,6 +53,7 @@ export const openSource: CardItem[] = [
 		tags: ["Spring AI", "Java"],
 		url: "https://github.com/alibaba/spring-ai-alibaba/pull/4731",
 		badge: "已合并",
+		badgeColor: "green",
 	},
 	{
 		title: "Spring AI",
@@ -59,34 +61,47 @@ export const openSource: CardItem[] = [
 		tags: ["Spring AI", "Java"],
 		url: "https://github.com/spring-projects/spring-ai/issues/6403",
 		badge: "Issue",
+		badgeColor: "blue",
 	},
 	{
 		title: "Apache Kafka",
 		desc: "参与社区贡献，关注消息流平台的工程实践。",
 		tags: ["消息队列", "Apache"],
 		url: "https://github.com/apache/kafka/pull/22544",
-		badge: "2 PR",
+		badge: "2 PR 已合并",
+		badgeColor: "green",
 	},
 	{
 		title: "Apache RocketMQ",
 		desc: "关注消息队列的文档完善、测试覆盖与工程实践优化。",
 		tags: ["消息队列", "Apache"],
 		url: "https://github.com/apache/rocketmq/pull/10440",
-		badge: "2 PR",
+		badge: "3 PR 已合并",
+		badgeColor: "green",
 	},
 	{
 		title: "AgentScope-Java",
 		desc: "Java Agent 框架贡献，关注工具调用、Agent 工程化与 AI 应用落地。",
 		tags: ["AI Agent", "Java"],
 		url: "https://github.com/agentscope-ai/agentscope-java/pull/1684",
-		badge: "1 PR",
+		badge: "已合并",
+		badgeColor: "green",
 	},
 	{
 		title: "maven-lockfile",
 		desc: "Maven 生态贡献，了解构建工具、依赖管理与工程规范。",
 		tags: ["构建工具", "Maven"],
 		url: "https://github.com/chains-project/maven-lockfile/pull/1595",
-		badge: "1 PR",
+		badge: "已合并",
+		badgeColor: "green",
+	},
+	{
+		title: "LangChain4j",
+		desc: "为 Google AI Gemini FinishReasonMapper 补充单元测试。",
+		tags: ["AI", "Java"],
+		url: "https://github.com/langchain4j/langchain4j/pull/5492",
+		badge: "进行中",
+		badgeColor: "amber",
 	},
 ];
 

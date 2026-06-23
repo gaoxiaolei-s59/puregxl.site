@@ -51,7 +51,7 @@ const { items, tabs, heading, subtitle } = Astro.props;
                         <div class="cw-tags">
                             {c.tags.map((t) => <span class="cw-tag">{t}</span>)}
                         </div>
-                        {c.badge && <span class="cw-badge">{c.badge}</span>}
+                        {c.badge && <span class:list={["cw-badge", c.badgeColor ? `cw-badge-${c.badgeColor}` : ""]}>{c.badge}</span>}
                     </div>
                 </Tag>
             );
@@ -114,7 +114,14 @@ const { items, tabs, heading, subtitle } = Astro.props;
     .cw-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 2px; }
     .cw-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .cw-tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(31,201,231,.14); color: #147a8c; }
-    .cw-badge { font-size: 11.5px; color: #35bfab; white-space: nowrap; font-weight: 500; }
+    .cw-badge { font-size: 11px; white-space: nowrap; font-weight: 500; padding: 2px 9px; border-radius: 999px; background: rgba(53,191,171,.14); color: #147a8c; }
+    .cw-badge-green { background: rgba(29,158,117,.15); color: #0f6e56; }
+    .cw-badge-amber { background: rgba(186,117,23,.16); color: #854f0b; }
+    .cw-badge-blue { background: rgba(55,138,221,.15); color: #185fa5; }
+    :global(html.dark) .cw-badge { background: rgba(53,191,171,.18); color: #6fd9ec; }
+    :global(html.dark) .cw-badge-green { background: rgba(29,158,117,.22); color: #5dcaa5; }
+    :global(html.dark) .cw-badge-amber { background: rgba(234,179,8,.18); color: #fac775; }
+    :global(html.dark) .cw-badge-blue { background: rgba(55,138,221,.22); color: #85b7eb; }
 
     :global(html.dark) .cw-wrap { background: linear-gradient(135deg, #0f2a2b 0%, #0c2230 55%, #102b2a 100%); }
     :global(html.dark) .cw-tab { background: rgba(255,255,255,.06); color: #cfe7e4; border-color: rgba(53,191,171,.3); }
