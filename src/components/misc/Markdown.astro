@@ -41,3 +41,29 @@ document.addEventListener("click", function (e: MouseEvent) {
     }
 });
 </script>
+
+<style is:global>
+    /* 文章阅读体验增强（作用于正文 .custom-md） */
+    .custom-md :where(p, li) > img,
+    .custom-md :where(figure) img {
+        border-radius: 12px;
+        box-shadow: 0 6px 22px rgba(51, 79, 82, .14);
+        margin-inline: auto;
+    }
+    :global(html.dark) .custom-md :where(p, li) > img,
+    :global(html.dark) .custom-md :where(figure) img {
+        box-shadow: 0 6px 22px rgba(0, 0, 0, .4);
+    }
+    .custom-md table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px var(--line-divider, rgba(0,0,0,.08));
+    }
+    .custom-md thead th {
+        background: color-mix(in srgb, var(--primary) 14%, transparent);
+        font-weight: 600;
+    }
+    .custom-md tbody tr:nth-child(even) {
+        background: color-mix(in srgb, var(--primary) 5%, transparent);
+    }
+</style>
