@@ -27,37 +27,37 @@ const removeTailingHash = (text: string) => {
 	return text.substring(0, lastIndexOfHash);
 };
 
-let heading1Count = 1;
-
 const maxLevel = siteConfig.toc.depth;
 ---
 {isPostsRoute &&
-<table-of-contents class:list={[className, "group"]}>
+<table-of-contents class:list={[className, "group block"]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
-            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
-        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
-    ">
-                <div class:list={["transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
-                    {
-                        "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
-                        "ml-4": heading.depth == minDepth + 1,
-                        "ml-8": heading.depth == minDepth + 2,
-                    }
-                ]}
-                >
-                    {heading.depth == minDepth && heading1Count++}
-                    {heading.depth == minDepth + 1 && <div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
-                    {heading.depth == minDepth + 2 && <div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
-                </div>
-                <div class:list={["transition text-sm", {
-                    "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
+            <a href={`#${heading.slug}`} class:list={["toc-item flex relative transition w-full py-1.5 pr-2 rounded-r-lg border-l-2 border-[var(--line-divider)] hover:bg-[var(--toc-btn-hover)]",
+                {
+                    "pl-3": heading.depth == minDepth,
+                    "pl-7": heading.depth == minDepth + 1,
+                    "pl-11": heading.depth == minDepth + 2,
+                }
+            ]}>
+                <div class:list={["toc-text transition text-sm leading-snug", {
+                    "text-50 font-medium": heading.depth == minDepth,
+                    "text-50": heading.depth == minDepth + 1,
                     "text-30": heading.depth == minDepth + 2,
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
-    <div id="active-indicator" style="opacity: 0" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all " +
-        "group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"]}></div>
+    <div id="active-indicator" style="opacity: 0" class:list={[{'hidden': headings.length == 0}, "absolute left-0 w-[2px] rounded-full bg-[var(--primary)] transition-all duration-200"]}></div>
 </table-of-contents>}
+
+<style is:global>
+    /* Active section highlight for the "On this page" table of contents */
+    #toc a.toc-item.visible {
+        border-inline-start-color: transparent;
+    }
+    #toc a.toc-item.visible .toc-text {
+        color: var(--primary);
+    }
+</style>
 
 <script>
 class TableOfContents extends HTMLElement {
