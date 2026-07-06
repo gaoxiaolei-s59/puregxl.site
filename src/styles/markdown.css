@@ -1,6 +1,22 @@
 .custom-md {
+    /* 中文长文阅读节奏：行高放宽、字距微调 */
+    p {
+        line-height: 1.875;
+        letter-spacing: 0.008em;
+    }
+    li {
+        line-height: 1.8;
+    }
+
     h1 {
         @apply text-3xl;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        /* 标题用 display 字族（拉丁走 Outfit，中文回落系统黑体）+ 收紧字距 */
+        @apply font-display tracking-tight;
+        /* 锚点跳转时给吸顶导航栏留出高度 */
+        scroll-margin-top: 5.5rem;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -117,6 +133,17 @@
             @apply content-none;
         }
 
+    }
+
+    /* 普通引用块（不含 admonition 提示框）：主色竖条 + 淡色底 */
+    blockquote:not(.admonition) {
+        background: color-mix(in srgb, var(--primary) 5%, transparent);
+        border-radius: 0.75rem;
+        padding: 0.6rem 1.1rem;
+
+        &:before {
+            @apply left-0 top-0 bg-[var(--primary)] opacity-80;
+        }
     }
 
     .katex-display-container {

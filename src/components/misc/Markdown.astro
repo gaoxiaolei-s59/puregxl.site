@@ -14,6 +14,68 @@ const className = Astro.props.class;
 </div>
 
 <script>
+// 正文图片动态加载：进入视口时淡入上浮，加载中显示 shimmer 骨架。
+// 隐藏态由 JS 添加（img-lazy），无 JS 时图片正常显示（渐进增强）。
+function initImageReveal() {
+	const imgs = document.querySelectorAll<HTMLImageElement>(
+		".custom-md img:not([data-reveal-bound])",
+	);
+	if (!imgs.length) return;
+
+	const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	const io = new IntersectionObserver(
+		(entries, observer) => {
+			for (const entry of entries) {
+				if (!entry.isIntersecting) continue;
+				const img = entry.target as HTMLImageElement;
+				observer.unobserve(img);
+				if (img.complete) img.classList.add("img-in");
+				else img.dataset.revealOnLoad = "true";
+			}
+		},
+		{ rootMargin: "0px 0px -6% 0px", threshold: 0.01 },
+	);
+
+	imgs.forEach((img) => {
+		img.dataset.revealBound = "true";
+		if (reduced) return; // 尊重系统减弱动效设置：不做隐藏与动画
+		img.classList.add("img-lazy");
+		if (!img.complete) {
+			img.classList.add("img-loading");
+			img.addEventListener(
+				"load",
+				() => {
+					img.classList.remove("img-loading");
+					if (img.dataset.revealOnLoad) img.classList.add("img-in");
+				},
+				{ once: true },
+			);
+			img.addEventListener(
+				"error",
+				() => {
+					img.classList.remove("img-loading");
+					img.classList.add("img-in");
+				},
+				{ once: true },
+			);
+		}
+		io.observe(img);
+	});
+}
+
+initImageReveal();
+
+// swup 换页后 DOM 被替换，需要对新内容重新绑定
+const bindSwupImageReveal = () => {
+	window.swup.hooks.on("content:replace", initImageReveal);
+};
+if (window?.swup?.hooks) {
+	bindSwupImageReveal();
+} else {
+	document.addEventListener("swup:enable", bindSwupImageReveal, { once: true });
+}
+
 document.addEventListener("click", function (e: MouseEvent) {
     const target = e.target as Element | null;
     if (target && target.classList.contains("copy-btn")) {
@@ -65,5 +127,42 @@ document.addEventListener("click", function (e: MouseEvent) {
     }
     .custom-md tbody tr:nth-child(even) {
         background: color-mix(in srgb, var(--primary) 5%, transparent);
+    }
+
+    /* 图片动态加载：进入视口淡入上浮（img-lazy 由 JS 添加，无 JS 时不隐藏） */
+    .custom-md img.img-lazy {
+        opacity: 0;
+        transform: translateY(14px) scale(.985);
+        transition: opacity .65s cubic-bezier(.22, .61, .36, 1), transform .65s cubic-bezier(.22, .61, .36, 1);
+        will-change: opacity, transform;
+    }
+    .custom-md img.img-lazy.img-in {
+        opacity: 1;
+        transform: none;
+    }
+    /* 加载中的 shimmer 骨架（宽高由 Astro 的 width/height 占位，不跳版） */
+    .custom-md img.img-loading {
+        background:
+            linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--primary) 14%, transparent) 50%, transparent 70%),
+            var(--btn-regular-bg);
+        background-size: 200% 100%, 100% 100%;
+        animation: img-shimmer 1.4s linear infinite;
+    }
+    @keyframes img-shimmer {
+        to { background-position: -200% 0, 0 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .custom-md img.img-lazy {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+    /* 打印时强制显示未滚到的图片 */
+    @media print {
+        .custom-md img.img-lazy {
+            opacity: 1;
+            transform: none;
+        }
     }
 </style>
