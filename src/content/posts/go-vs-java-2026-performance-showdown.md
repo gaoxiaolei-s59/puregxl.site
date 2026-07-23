@@ -4,14 +4,12 @@ published: 2026-07-10
 description: "从真实 API 负载出发，对比 Go 与现代 Java 在吞吐量、内存、冷启动、GC 尾延迟、容器密度和生态成熟度上的差异，并给出可复现的测试方法。"
 image: ""
 tags: [Go, Java, 性能, 后端开发]
-category: 转载
+
 draft: false
 lang: "zh-CN"
 ---
 
-> [!NOTE]
-> **本文为授权转载翻译，仅供学习交流，版权归原作者所有。**
-> 原文《[Go vs Java in 2026: An Honest Performance Comparison for Backend Services](https://backendbytes.com/articles/go-vs-java-2026-performance-showdown/)》由 **BackendBytes Engineering Team** 撰写，发表于 **2026 年 2 月 12 日**。中文由 XiaoLei 翻译整理。
+
 
 > “我们要不要用 Go 重写？”
 
@@ -433,12 +431,4 @@ public class ColdStartBench {
 
 如果服务轻量、高并发，而且快速启动、小镜像与低内存很重要，例如边缘服务和 API 网关，选择 Go。如果服务包含复杂业务逻辑，成熟的 Spring、Hibernate 与测试生态能显著提高开发和维护效率，选择 Java。
 
-## 延伸阅读
 
-- [Java Virtual Threads: Project Loom, Pinning Hazards, and Production Migration](https://backendbytes.com/articles/java-virtual-threads-concurrency-revolution/)：虚拟线程调度、固定（pinning）规则以及迁移陷阱。
-- [GraalVM Native Images in Production: From 5-Second Startup to 50ms](https://backendbytes.com/articles/graalvm-native-images-java-production/)：Native Image 的限制、PGO 调优以及启动收益是否值得吞吐代价。
-- [Go Worker Pool Pattern: Production-Ready Concurrency Control](https://backendbytes.com/articles/go-worker-pool-concurrency/)：把 goroutine 优势转化为带背压和并发上限的 Worker Pool。
-
-## 下一篇：生产环境中的 Go Green Tea GC
-
-下一篇将从 CPU 基准转向内存管理，分析 Go 1.26 新 Green Tea 垃圾收集器在高堆分配率下的表现，并与标准 Go GC 和 Java ZGC 对比。可阅读[原站的 Green Tea GC 深入分析](https://backendbytes.com/articles/go-green-tea-gc-production/)。
