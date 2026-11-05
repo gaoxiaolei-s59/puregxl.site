@@ -1,4 +1,4 @@
-// 卡片墙数据 —— /projects /games /share 三个页面的内容都在这里编辑。
+// 卡片墙数据 —— /projects /share 两个页面的内容都在这里编辑。
 // 加一张卡 = 在对应数组里加一个对象。字段说明见下方 CardItem。
 
 export interface CardItem {
@@ -9,7 +9,7 @@ export interface CardItem {
 	badge?: string; // 可选：右下角小徽章，如 "本站" "进行中" "2 PR"
 	badgeColor?: "green" | "amber" | "blue" | "teal"; // 徽章配色：green=已完成/合并，amber=进行中，blue=信息/Issue，默认 teal
 	category?: string; // 仅 /share 用：所属分类，要和页面 tabs 里的某一项一致
-	image?: string; // 可选：卡片顶部封面图（public 下的路径，如 "/games/wukong.jpg"）
+	image?: string; // 可选：卡片顶部封面图（public 下的路径，如 "/images/cover.jpg"）
 	imageFit?: "cover" | "contain"; // 封面填充方式：截图用 cover（默认），logo 用 contain
 	imageBg?: string; // contain 模式下封面区背景（深色 logo 配浅底，亮色 logo 配深底）
 }
@@ -118,70 +118,6 @@ export const openSource: CardItem[] = [
 		url: "https://github.com/langchain4j/langchain4j/pull/5715",
 		badge: "2 PR 已合并",
 		badgeColor: "green",
-	},
-];
-
-// ===== 热爱的游戏 =====
-export const games: CardItem[] = [
-	{
-		title: "英雄联盟",
-		desc: "陪伴很久的竞技游戏，最喜欢它的团队配合、操作上限和翻盘感。",
-		tags: ["MOBA", "竞技", "开黑"],
-		image: "/games/lol.png",
-		imageFit: "contain",
-		imageBg: "linear-gradient(135deg, #0a1428, #1e2d4d)",
-		url: "https://www.leagueoflegends.com/zh-cn/",
-		badge: "常玩",
-	},
-	{
-		title: "鸣潮",
-		desc: "喜欢它的战斗手感、角色设计和开放世界里的探索节奏。",
-		tags: ["开放世界", "动作 RPG", "二次元"],
-		image: "/games/wuwa.png",
-		imageFit: "contain",
-		imageBg: "linear-gradient(135deg, #eef3f7, #dde9f1)",
-		url: "https://wutheringwaves.kurogames.com/zh/main",
-		badge: "探索",
-	},
-	{
-		title: "黑神话：悟空",
-		desc: "国产动作游戏里让我印象很深的一部，氛围、演出和战斗都很顶。",
-		tags: ["动作", "神话", "单机"],
-		image: "/games/wukong.jpg",
-		url: "https://www.heishenhua.com/",
-		badge: "国产",
-	},
-	{
-		title: "逸剑风云决",
-		desc: "像素武侠和江湖叙事很对我胃口，既有旧味道也有现代体验。",
-		tags: ["武侠", "像素 RPG", "剧情"],
-		image: "/games/wanderingsword.jpg",
-		url: "https://store.steampowered.com/app/1876890/Wandering_Sword/?l=schinese",
-		badge: "江湖",
-	},
-	{
-		title: "幻兽帕鲁",
-		desc: "轻松上头的抓宠和生存建造体验，和朋友一起玩会更快乐。",
-		tags: ["生存", "建造", "联机"],
-		image: "/games/palworld.jpg",
-		url: "https://store.steampowered.com/app/1623730/Palworld/",
-		badge: "联机",
-	},
-	{
-		title: "艾尔登法环",
-		desc: "魂系开放世界的集大成者，受苦也上头。",
-		tags: ["魂系", "开放世界", "ACT"],
-		image: "/games/eldenring.jpg",
-		url: "https://store.steampowered.com/app/1245620/",
-		badge: "受苦",
-	},
-	{
-		title: "只狼：影逝二度",
-		desc: "弹刀流硬核忍者动作，攻防一体的极致爽快。",
-		tags: ["魂系", "动作", "硬核"],
-		image: "/games/sekiro.jpg",
-		url: "https://store.steampowered.com/app/814380/",
-		badge: "硬核",
 	},
 ];
 
